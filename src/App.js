@@ -8,6 +8,12 @@ import Navbar from './components/shared/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 
 
+// Admin Module
+import UserManagement from './components/admin/UserManagement';
+import BookTransactionMonitoring from './components/admin/TransactionMonitoring';
+
+
+
 // Member Module
 import BookSearchBorrow from './components/member/BookSearchBorrow';
 import BorrowingHistory from './components/member/BorrowingHistory';
@@ -63,6 +69,48 @@ function App() {
     </ProtectedRoute>
   }
 />
+
+{/* Admin Routes */}
+          <Route
+            path="/admin/user-role"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <UserManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/book-monitoring"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <BookTransactionMonitoring />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/book-management"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <BookManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/issue-return"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <IssueReturnSystem />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reports"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <TransactionReports />
+              </ProtectedRoute>
+            }
+          />
 
            </Routes>
            </div>

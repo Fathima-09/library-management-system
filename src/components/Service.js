@@ -1,11 +1,49 @@
-// src/components/Service.js OR src/services/Service.js
-
 import axios from 'axios';
 
+const BASE_URL = 'http://localhost:8080/api/member';
 const ADMIN_URL = 'http://localhost:8080/api/admin';
 
-class ApiService {
-  //  Fetch all users
+
+class Api {
+  // 1. Get all available books
+  static getAvailableBooks() {
+    return axios.get(`${BASE_URL}/books`);
+  }
+
+  // 2. Borrow a book
+  static borrowBook(userId, bookId) {
+    return axios.post(`${BASE_URL}/borrow`, null, {
+      params: { userId, bookId },
+    });
+  }
+
+  // 3. Get borrowing history
+  static getBorrowingHistory(userId) {
+    return axios.get(`${BASE_URL}/history/${userId}`);
+  }
+
+  // 4. Get member profile
+  static getProfile(userId) {
+    return axios.get(`${BASE_URL}/profile/${userId}`);
+  }
+
+  // 5. Update member profile
+  static updateProfile(userId, data) {
+    return axios.put(`${BASE_URL}/profile/${userId}`, data);
+  }
+
+  // 6. Get notifications
+  static getNotifications(userId) {
+    return axios.get(`${BASE_URL}/notifications/${userId}`);
+  }
+
+  //7. Return a book
+  static returnBook(userId, bookId) {
+  return axios.post(`${BASE_URL}/history/return`, null, {
+    params: { userId, bookId },
+  });
+ }
+//  Fetch all users
   static fetchUsers() {
     return axios.get(`${ADMIN_URL}/users`);
   }
@@ -22,5 +60,6 @@ class ApiService {
     return axios.get(`${ADMIN_URL}/book-monitoring`);
   }
 }
+  
 
-export default ApiService;
+export default Api;
