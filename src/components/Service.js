@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8080/api/member';
-const AUTH_URL = 'http://localhost:8080/api/auth'; // Used for auth operations like login, register, otp
+const ADMIN_URL = 'http://localhost:8080/api/admin';
+
 
 class Api {
   // 1. Get all available books
@@ -41,27 +42,24 @@ class Api {
   return axios.post(`${BASE_URL}/history/return`, null, {
     params: { userId, bookId },
   });
-}
-
-  // 8. Login (POST /api/auth/login)
-  static login(email, password) {
-    return axios.post(`${AUTH_URL}/login`, { email, password });
+ }
+//  Fetch all users
+  static fetchUsers() {
+    return axios.get(`${ADMIN_URL}/users`);
   }
 
-  // 9. Register (POST /api/auth/register)
-  static register(email, password, role) {
-    return axios.post(`${AUTH_URL}/register`, { email, password, role });
+  // Update a user’s role
+  static updateUserRole(userId, newRole) {
+    return axios.put(`${ADMIN_URL}/users/${userId}/role`, newRole, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
-  // 10. Send OTP (POST /api/auth/send-otp)
-  static sendOtp(email) {
-    return axios.post(`${AUTH_URL}/send-otp`, { email });
-  }
-
-  // 11. Verify OTP (POST /api/auth/verify-otp)
-  static verifyOtp(email, otp) {
-    return axios.post(`${AUTH_URL}/verify-otp`, { email, otp });
+  // Fetch all book transactions
+  static fetchTransactions() {
+    return axios.get(`${ADMIN_URL}/book-monitoring`);
   }
 }
+  
 
 export default Api;
