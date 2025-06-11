@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8080/api/member';
 const AUTH_URL = 'http://localhost:8080/api/auth'; // Used for auth operations like login, register, otp
+const API_BASE_URL = "http://localhost:8080"; // Update if backend runs elsewhere
 
 class Api {
   // 1. Get all available books
@@ -62,6 +63,45 @@ class Api {
   static verifyOtp(email, otp) {
     return axios.post(`${AUTH_URL}/verify-otp`, { email, otp });
   }
+
+  
+  // BOOK APIs
+  static getAvailableBooks() {
+    return axios.get(`${BASE_URL}/books`);
+  }
+
+  static addBook(book) {
+    return axios.post(`${BASE_URL}/books`, book);
+  }
+
+  static updateBook(id, book) {
+    return axios.put(`${BASE_URL}/books/${id}`, book);
+  }
+
+  static deleteBook(id) {
+    return axios.delete(`${BASE_URL}/books/${id}`);
+  }
+
+  static updateBookAvailability(id, available) {
+    return axios.put(`${BASE_URL}/books/${id}/availability`, { available });
+  }
+
+  // USER APIs
+  static fetchUsers() {
+    return axios.get(`${BASE_URL}/users`);
+  }
+
+  // TRANSACTION APIs
+  static fetchTransactions() {
+    return axios.get(`${BASE_URL}/transactions`);
+  }
+
+  static addTransaction(transaction) {
+    return axios.post(`${BASE_URL}/transactions`, transaction);
+  }
+
+  
+  
 }
 
 export default Api;

@@ -64,6 +64,31 @@ function App() {
   }
 />
 
+ <Route
+  path="/librarian/book-management"
+  element={
+    <ProtectedRoute allowedRoles={['librarian']}>
+      <BookManagement />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/librarian/issue-return"
+  element={
+    <ProtectedRoute allowedRoles={['librarian']}>
+      <IssueReturnSystem />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/librarian/reports"
+  element={
+    <ProtectedRoute allowedRoles={['librarian']}>
+      <TransactionReports />
+    </ProtectedRoute>
+  }
+/>
+
            </Routes>
            </div>
     </Router>
