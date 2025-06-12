@@ -7,11 +7,19 @@ import './App.css';
 import Navbar from './components/shared/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 
+// Authentication
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import EmailVerification from './components/auth/EmailVerification';
 
 // Admin Module
 import UserManagement from './components/admin/UserManagement';
 import BookTransactionMonitoring from './components/admin/TransactionMonitoring';
 
+//librarian Module
+import BookManagement from './components/librarian/BookManagement';
+import IssueReturnSystem from './components/librarian/IssueReturnSystem';
+import TransactionReports from './components/librarian/TransactionReports';
 
 
 // Member Module
@@ -34,43 +42,12 @@ function App() {
             <Home />
              </ProtectedRoute> }/>
 
-         
-          {/* Member Routes */}
-          <Route
-            path="/member/search-borrow"
-            element={
-              <ProtectedRoute allowedRoles={['member']}>
-                <BookSearchBorrow />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/member/borrow-history"
-            element={
-              <ProtectedRoute allowedRoles={['member']}>
-                <BorrowingHistory />
-              </ProtectedRoute>
-            }
-          />
-           
-          <Route
-            path="/member/profile"
-            element={
-              <ProtectedRoute allowedRoles={['member']}>
-                <MemberProfile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-  path="/member/notifications"
-  element={
-    <ProtectedRoute allowedRoles={['member']}>
-      <MemberNotifications />
-    </ProtectedRoute>
-  }
-/>
+          {/* Authentication */}
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/verify-email" element={<EmailVerification />} />
 
-{/* Admin Routes */}
+          {/* Admin Routes */}
           <Route
             path="/admin/user-role"
             element={
@@ -111,6 +88,66 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          {/* Member Routes */}
+          <Route
+            path="/member/search-borrow"
+            element={
+              <ProtectedRoute allowedRoles={['member']}>
+                <BookSearchBorrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/member/borrow-history"
+            element={
+              <ProtectedRoute allowedRoles={['member']}>
+                <BorrowingHistory />
+              </ProtectedRoute>
+            }
+          />
+           
+          <Route
+            path="/member/profile"
+            element={
+              <ProtectedRoute allowedRoles={['member']}>
+                <MemberProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+  path="/member/notifications"
+  element={
+    <ProtectedRoute allowedRoles={['member']}>
+      <MemberNotifications />
+    </ProtectedRoute>
+  }
+/>
+  {/* Librarian Routes */}
+          <Route
+  path="/librarian/book-management"
+  element={
+    <ProtectedRoute allowedRoles={['librarian']}>
+      <BookManagement />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/librarian/issue-return"
+  element={
+    <ProtectedRoute allowedRoles={['librarian']}>
+      <IssueReturnSystem />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/librarian/reports"
+  element={
+    <ProtectedRoute allowedRoles={['librarian']}>
+      <TransactionReports />
+    </ProtectedRoute>
+  }
+/>
 
            </Routes>
            </div>
