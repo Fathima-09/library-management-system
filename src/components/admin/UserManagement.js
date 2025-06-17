@@ -1,7 +1,7 @@
 // src/components/admin/UserManagement.js
 
 import React, { useEffect, useState } from 'react';
-import ApiService from '../../components/Service'; // adjust if you moved the file
+import Api from '../../components/Service'; // adjust if you moved the file
 
 const roles = ['Member', 'Librarian', 'Admin'];
 
@@ -9,7 +9,7 @@ const UserManagement = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    ApiService.fetchUsers()
+    Api.fetchUsers()
       .then(res => setUsers(res.data))
       .catch(err => console.error('Error fetching users:', err));
   }, []);
@@ -24,7 +24,7 @@ const UserManagement = () => {
 
   const handleSave = async (user) => {
     try {
-      await ApiService.updateUserRole(user.id, user.role);
+      await Api.updateUserRole(user.id, user.role);
       alert('User role updated successfully!');
     } catch (err) {
       console.error('Error updating user role:', err);

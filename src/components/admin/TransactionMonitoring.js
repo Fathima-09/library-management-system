@@ -1,13 +1,13 @@
 // src/components/admin/TransactionMonitoring.js
 
 import React, { useEffect, useState } from 'react';
-import ApiService from '../../components/Service'; // adjust the path if necessary
+import Api from '../../components/Service'; // adjust the path if necessary
 
 const TransactionMonitoring = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    ApiService.fetchTransactions()
+    Api.fetchTransactions()
       .then(res => setTransactions(res.data))
       .catch(err => console.error('Error fetching transactions:', err));
   }, []);
